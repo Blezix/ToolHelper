@@ -1,8 +1,8 @@
-import { Col, Table } from "antd";
+import { Col, Row, Table } from "antd";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import * as XLSX from "xlsx";
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 
 interface SheetData {
     sheetName: string;
@@ -11,7 +11,6 @@ interface SheetData {
 
 const ExcelUploader: React.FC = () => {
     const [sheetData, setSheetData] = useState<SheetData[]>([]);
-    const [columns, setColumns] = useState<any[]>([]);
 
     const testAxiosXlsx = async (url: string) => {
         const options = {
@@ -31,16 +30,6 @@ const ExcelUploader: React.FC = () => {
         // Filter to only include "Sheet1"
         const filteredWorksheets = worksheets.filter(sheet => sheet.sheetName === "Sheet1");
 
-        if (filteredWorksheets.length > 0 && filteredWorksheets[0].data.length > 0) {
-            const firstRow = filteredWorksheets[0].data[0]
-            const dynamicColumns = Object.keys(firstRow).map(key => ({
-                title: key,
-                dataIndex: key,
-                key: key,
-            }));
-            setColumns(dynamicColumns);
-        }
-
         setSheetData(filteredWorksheets);
         console.log("json:\n", JSON.stringify(filteredWorksheets), "\n\n");
     };
@@ -51,15 +40,48 @@ const ExcelUploader: React.FC = () => {
         );
     };
 
+    const columns = [
+        {
+            title: "Segment",
+            dataIndex: "A",
+            key: "Segment",
+        },
+        {
+            title: "Country",
+            dataIndex: "B",
+            key: "Country",
+        },
+        {
+            title: "Product",
+            dataIndex: "C",
+            key: "Product",
+        },
+        {
+            title: "Units Sold",
+            dataIndex: "D",
+            key: "Units Sold",
+        },
+        {
+            title: "Manufacturing Price",
+            dataIndex: "E",
+            key: "Manufacturing Price",
+        },
+        {
+            title: "Sale Price",
+            dataIndex: "F",
+            key: "Sale Price",
+        },
+    ];
+
     useEffect(() => {
         validate();
     }, []);
 
     return (
         <Box sx={{
-            width: "50%",
-            height: "90vh",
-            overflowY: "scroll"
+            width:"50%",
+            height:"400px",
+            overflowY:"scroll",
         }}>
             <Col lg={12}>
                 <h3>The Data of The Uploaded Excel Sheet</h3>
@@ -67,13 +89,10 @@ const ExcelUploader: React.FC = () => {
             <Col lg={24}>
                 {sheetData &&
                     sheetData.map((sheet) => (
-                        <Box sx={{
-                            width: "100%",
-                            height: "400px",
-                            overflow: "auto"
-                        }} component={'div'} key={sheet.sheetName}>
+                        <div key={sheet.sheetName}>
+                            <p>{sheet.sheetName}</p>
                             <Table dataSource={sheet.data.slice(1)} columns={columns} />
-                        </Box>
+                        </div>
                     ))}
             </Col>
         </Box>
