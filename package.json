@@ -9,14 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.7",
+    "@mui/material": "^6.4.7",
+    "antd": "^5.24.3",
+    "axios": "^1.8.3",
+    "canvas": "^3.0.0-rc3",
+    "fabric": "^6.6.1",
+    "jspdf": "^3.0.0",
+    "konva": "^9.3.18",
+    "motion": "^12.4.13",
+    "next": "15.2.1",
+    "pdf-lib": "^1.17.1",
     "react": "^19.0.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^19.0.0",
-    "next": "15.2.1"
+    "react-draggable": "^4.4.6",
+    "react-konva": "^19.0.3",
+    "use-image": "^1.1.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@types/fabric": "^5.3.10",
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "@types/react-dom": "^19",
+    "file-saver": "^2.0.5",
+    "typescript": "^5"
   }
 }
